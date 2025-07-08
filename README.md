@@ -8,7 +8,7 @@ A full-stack web application built using the **MERN stack (MongoDB, Express.js, 
 
 ### 👤 User Features
 - Register and login with JWT authentication
-- Browse available doctors and book appointments
+- Browse available doctors
 - View and manage upcoming and past appointments
 
 ### 🩺 Doctor/Patients Features
