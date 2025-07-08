@@ -39,3 +39,8 @@ A full-stack web application built using the **MERN stack (MongoDB, Express.js, 
 - JWT-based user login and protected routes.
 - Role-based access (Patient / Doctor / Admin).
 
+🙋‍♂️ Author
+Arshad Khan
+MERN Stack Developer
+📧 arshadkhan73316@gmail.com | 🌐 [Your Portfolio Link]
+
