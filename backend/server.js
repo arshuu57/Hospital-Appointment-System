@@ -22,4 +22,9 @@ app.use('/api', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/appointments', appointmentRoutes);
 
-app.listen(5000, () => console.log('Server running on port 5000'));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.get('/', (req, res) => {
+  res.send('Hospital Appointment System Backend is Live');
+});
