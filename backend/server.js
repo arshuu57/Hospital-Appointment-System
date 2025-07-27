@@ -1,6 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config(); // Load variables from .env
+
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const appointmentRoutes = require('./routes/appointments');
@@ -9,9 +13,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const mongoURI = "mongodb://127.0.0.1:27017/appointmentSystem";
+const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(mongoURI, {
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
