@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './dash.css';
-
-const API = process.env.REACT_APP_API_BASE;
+import './dash.css'
 
 export default function Dashboard() {
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API}/api/users/doctors`, {
+    axios.get('http://localhost:5000/api/users/doctors', {
       headers: { Authorization: localStorage.getItem('token') },
     }).then(res => setDoctors(res.data));
   }, []);
@@ -24,3 +22,5 @@ export default function Dashboard() {
     </div>
   );
 }
+
+

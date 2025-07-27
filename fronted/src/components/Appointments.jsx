@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
-const API_BASE = process.env.REACT_APP_API_BASE;
+    import { useNavigate } from 'react-router-dom';
 
 export default function Appointments() {
   const [appointments, setAppointments] = useState([]);
@@ -10,13 +8,13 @@ export default function Appointments() {
   const [doctors, setDoctors] = useState([]);
 
   const fetchAppointments = () => {
-    axios.get(`${API_BASE}/api/appointments`, {
+    axios.get('http://localhost:5000/api/appointments', {
       headers: { Authorization: localStorage.getItem('token') },
     }).then(res => setAppointments(res.data));
   };
 
   useEffect(() => {
-    axios.get(`${API_BASE}/api/users/doctors`, {
+    axios.get('http://localhost:5000/api/users/doctors', {
       headers: { Authorization: localStorage.getItem('token') },
     }).then(res => setDoctors(res.data));
 
@@ -25,28 +23,35 @@ export default function Appointments() {
 
   const handleBook = async (e) => {
     e.preventDefault();
-    await axios.post(`${API_BASE}/api/appointments`, form, {
+    await axios.post('http://localhost:5000/api/appointments', form, {
       headers: { Authorization: localStorage.getItem('token') },
     });
     fetchAppointments();
   };
 
   const handleCancel = async (id) => {
-    await axios.delete(`${API_BASE}/api/appointments/${id}`, {
+    await axios.delete(`http://localhost:5000/api/appointments/${id}`, {
       headers: { Authorization: localStorage.getItem('token') },
     });
     fetchAppointments();
   };
 
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+        // Navigate to a specific path
+        navigate('/');
+  }
+
   return (
     <div className="p-4">
       <h2>Book Appointment</h2>
       <form onSubmit={handleBook}>
-        <select onChange={e => setForm({ ...form, doctorId: e.target.value })}>
+        <select onChange={e => setForm({...form, doctorId: e.target.value})}>
           <option>Select Doctor</option>
           {doctors.map(doc => <option key={doc._id} value={doc._id}>{doc.username}</option>)}
         </select>
-        <input type="datetime-local" onChange={e => setForm({ ...form, date: e.target.value })} />
+        <input type="datetime-local" onChange={e => setForm({...form, date: e.target.value})} />
         <button type="submit">Book</button>
       </form>
 
@@ -59,6 +64,8 @@ export default function Appointments() {
           </li>
         ))}
       </ul>
+       <button onClick={handleClick}>Go to Registeration</button>
     </div>
   );
 }
+

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './register.css';
+import './register.css'
 
 export default function Register() {
   const [form, setForm] = useState({ username: '', password: '', role: 'patient' });
@@ -9,37 +9,19 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post(`${process.env.REACT_APP_API_BASE}/api/register`, form);
-      navigate('/login');
-    } catch (err) {
-      console.error('Registration failed:', err);
-      alert('Registration failed. Please try again.');
-    }
+    await axios.post('http://localhost:5000/api/register', form);
+    navigate('/login');
   };
 
   return (
     <form onSubmit={handleSubmit} className="p-4">
       <h2>Register</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        onChange={e => setForm({ ...form, username: e.target.value })}
-        required
-      /><br />
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={e => setForm({ ...form, password: e.target.value })}
-        required
-      /><br />
-      <select
-        value={form.role}
-        onChange={e => setForm({ ...form, role: e.target.value })}
-      >
+      <input type="text" placeholder="Username" onChange={e => setForm({...form, username: e.target.value})} /><br/>
+      <input type="password" placeholder="Password" onChange={e => setForm({...form, password: e.target.value})} /><br/>
+      <select onChange={e => setForm({...form, role: e.target.value})}>
         <option value="patient">Patient</option>
         <option value="doctor">Doctor</option>
-      </select><br />
+      </select><br/>
       <button type="submit">Register</button>
     </form>
   );
