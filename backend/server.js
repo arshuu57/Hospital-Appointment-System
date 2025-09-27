@@ -11,13 +11,9 @@ app.use(cors());
 app.use(express.json());
 
 
-mongoose.connect("mongodb://localhost:27017/mydb", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI, {
 
-
-.then(() => console.log("MongoDB connected successfully!"))
+}).then(() => console.log("MongoDB connected successfully!"))
 .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use('/api', authRoutes);
